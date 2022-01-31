@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "170716df-70c7-43c7-9d4c-43891a6d8512",
+		"name": "User",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LOCAL",
+			"item": [
+				{
+					"name": "getUserRecord",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5252/v1/user/userid/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5252",
+							"path": [
+								"v1",
+								"user",
+								"userid",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUserRecord",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fname\":\"sreejay\",\r\n    \"lname\":\"s\",\r\n    \"email\": \"sreejays@meraemi.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5252/v1/user/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5252",
+							"path": [
+								"v1",
+								"user",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUserRecord",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"sreejays@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5252/v1/user/update/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5252",
+							"path": [
+								"v1",
+								"user",
+								"update",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUserRecord",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5252/v1/user/delete/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5252",
+							"path": [
+								"v1",
+								"user",
+								"delete",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UAT",
+			"item": []
+		},
+		{
+			"name": "PROD",
+			"item": []
+		}
+	]
+}
