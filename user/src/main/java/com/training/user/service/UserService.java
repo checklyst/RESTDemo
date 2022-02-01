@@ -9,10 +9,15 @@ import java.sql.Statement;
 import java.sql.Types;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.training.user.config.DatabaseConfig;
 import com.training.user.enumConstant.CommonMessageEnum;
 
 public class UserService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(System.class);
 	
 	DatabaseConfig con = new DatabaseConfig();
 	Connection conn;
@@ -22,6 +27,8 @@ public class UserService {
 	ResultSet rs;
 	
 	public String getUserById(int userId) {
+		
+		logger.info("getUserById started");
 		
 		String QUERY = "CALL P_getUserRecord(?)";
 		JSONObject response = new JSONObject();
@@ -54,9 +61,13 @@ public class UserService {
 			cstmt.close();
 			conn.close();
 			
-		} catch (Exception e) {
+		}catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("UserService: SQLException in getUserById()",e);
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.error("UserService: Exception in getUserById()",e);
 		}
 		
 		return response.toString();
