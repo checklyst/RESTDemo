@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty scope="context" name="LOG_PATH" source="logging.file.path"/>
+    <property name="LOG_FILE"
+              value="${LOG_PATH}" />
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{dd-MM-yyyy HH:mm:ss.sss}][%-5p][%C][%t][%L]%m%n
+            </pattern>
+        </encoder>
+    </appender>
+    <timestamp key="myTimestamp" timeReference="contextBirth" datePattern="dd-MM-yyyy"/>
+    <appender name="FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}/user-logs-${myTimestamp}.log</file>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_FILE}/%d{dd-MM-yyyy, aux}/user-logs-%d{dd-MM-yyyy}.%i.log
+            </fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%d{dd-MM-yyyy HH:mm:ss.sss}][%-5p][%C][%t][%L]%m%n
+            </pattern>
+        </encoder>
+    </appender>
+    <logger name="com.training.user" level="INFO" />
+    <root level="info">
+        <appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT" />
+    </root>
+    <!-- config for STDOUT and SAVE-TO-FILE -->
+    <springProfile name="dev">
+        <root level="error">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="FILE" />
+        </root>
+        <logger name="com.training.demo" additivity="false" level="error">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="FILE" />
+        </logger>
+    </springProfile>
+    <springProfile name="uat">
+        <root level="info">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="FILE" />
+        </root>
+        <logger name="com.training.demo" additivity="false" level="error">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="FILE" />
+        </logger>
+    </springProfile>
+    <springProfile name="prod">
+        <root level="info">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="FILE" />
+        </root>
+        <logger name="com.training.demo" additivity="false" level="error">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="FILE" />
+        </logger>
+    </springProfile>
+</configuration>
